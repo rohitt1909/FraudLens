@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FraudLens | Banking Risk Intelligence</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h1>FraudLens</h1>
+            <p>BANKING RISK INTELLIGENCE</p>
+        </div>
+
+        <nav>
+            <a href="#overview" class="active">Overview</a>
+            <a href="#analytics">Risk Analytics</a>
+            <a href="#transactions">Transactions</a>
+            <a href="#simulator">Transaction Simulator</a>
+            <a href="#performance">Model Performance</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>FraudLens v1.0</p>
+            <span>Synthetic Data Environment</span>
+        </div>
+
+    </aside>
+
+    <!-- Main Dashboard -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Fraud Monitoring Dashboard</h1>
+                <p>Transaction intelligence and risk analysis</p>
+            </div>
+
+            <span class="status-badge">
+                Demo Environment
+            </span>
+        </header>
+
+        <!-- Overview Cards -->
+        <section id="overview" class="stats-grid">
+
+            <div class="stat-card">
+                <p>Total Transactions</p>
+                <h2 id="total-transactions">--</h2>
+                <span>Transactions monitored</span>
+            </div>
+
+            <div class="stat-card warning">
+                <p>Suspicious Alerts</p>
+                <h2 id="combined-alerts">--</h2>
+                <span>Requires investigation</span>
+            </div>
+
+            <div class="stat-card danger">
+                <p>High Risk Transactions</p>
+                <h2 id="high-risk">--</h2>
+                <span>Priority review</span>
+            </div>
+
+            <div class="stat-card purple">
+                <p>Flagged Transaction Value</p>
+                <h2 id="suspicious-amount">--</h2>
+                <span>Potential exposure</span>
+            </div>
+
+        </section>
+
+        <!-- Analytics Charts -->
+        <section id="analytics" class="charts-grid">
+
+            <div class="panel">
+                <h2>Transaction Risk Distribution</h2>
+
+                <div class="chart-container">
+                    <canvas id="riskChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Detection Engine Comparison</h2>
+
+                <div class="chart-container">
+                    <canvas id="detectionChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Transaction Table -->
+        <section id="transactions" class="panel">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Transaction Explorer</h2>
+                    <p>Monitor and investigate transactions</p>
+                </div>
+
+                <div class="filters">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search transactions..."
+                    >
+
+                    <select id="riskFilter">
+                        <option value="All">All Risk Levels</option>
+                        <option value="High">High Risk</option>
+                        <option value="Medium">Medium Risk</option>
+                        <option value="Low">Low Risk</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Customer ID</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Risk Score</th>
+                            <th>Risk Level</th>
+                            <th>Alert</th>
+                            <th>Triggered Rules</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="transactionTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- Transaction Simulator -->
+        <section id="simulator" class="panel">
+
+            <h2>Live Transaction Simulator</h2>
+
+            <p>
+                Enter transaction details to generate
+                an instant fraud risk assessment.
+            </p>
+
+            <form id="simulationForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="amount">
+                            Transaction Amount (INR)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            value="250000"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hour">
+                            Transaction Hour (0-23)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="hour"
+                            value="2"
+                            min="0"
+                            max="23"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="device_known">
+                            Device Status
+                        </label>
+
+                        <select id="device_known">
+                            <option value="1">Known Device</option>
+                            <option value="0" selected>Unknown Device</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location_known">
+                            Location Status
+                        </label>
+
+                        <select id="location_known">
+                            <option value="1">Known Location</option>
+                            <option value="0" selected>Unknown Location</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="failed_attempts">
+                            Failed Attempts
+                        </label>
+
+                        <input
+                            type="number"
+                            id="failed_attempts"
+                            value="6"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transactions_last_hour">
+                            Transactions in Last Hour
+                        </label>
+
+                        <input
+                            type="number"
+                            id="transactions_last_hour"
+                            value="12"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="average_customer_spend">
+                            Average Customer Spend (INR)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="average_customer_spend"
+                            value="5000"
+                            min="1"
+                            step="0.01"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="primary-button">
+                    Analyze Transaction
+                </button>
+
+            </form>
+
+            <div id="simulationResult" class="simulation-result">
+                Submit a transaction to view its risk assessment.
+            </div>
+
+        </section>
+
+        <!-- Model Performance -->
+        <section id="performance" class="panel">
+
+            <h2>Detection Model Performance</h2>
+
+            <p>
+                Evaluation on 2,000 held-out synthetic transactions
+            </p>
+
+            <div class="performance-grid">
+
+                <div class="metric-card">
+                    <p>Statistical Model Accuracy</p>
+                    <h2>96.50%</h2>
+                </div>
+
+                <div class="metric-card">
+                    <p>Statistical Model Precision</p>
+                    <h2>61.34%</h2>
+                </div>
+
+                <div class="metric-card">
+                    <p>Rule Engine Recall</p>
+                    <h2>100%</h2>
+                </div>
+
+                <div class="metric-card">
+                    <p>Statistical Model F1 Score</p>
+                    <h2>67.59%</h2>
+                </div>
+
+            </div>
+
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+
+        </section>
+
+        <footer>
+            FraudLens v1.0 | Banking Fraud Detection Prototype
+            | Synthetic Data Only
+        </footer>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>

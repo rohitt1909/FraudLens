@@ -1,0 +1,28 @@
+
+# Virtual environments
+venv/
+venv312/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Testing cache
+.pytest_cache/
+
+# Environment variables
+.env
+
+# IDE settings
+.vscode/
+
+# Generated data and models
+data/*.csv
+data/*.db
+data/*.pkl
+data/anomaly_model.json
+
+# Operating system files
+.DS_Store
+Thumbs.db
